@@ -15,7 +15,7 @@
       <field name="balance" position="replace">
         <field name="balance" string="Margen actual" sum="balance" />
       </field>
-      <field name="partner_id" position="after">
+      <field name="code" position="after">
         <field name="budget_project" sum = "budget_project" />
         <field name="margin_project" string="Margen proyecto" widget="Monetary" sum="margin_project" />
         <field name="outstanding_invoice_amount" string="Pendiente a facturar" widget="Monetary" sum="outstanding_invoice_amount" />
