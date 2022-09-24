@@ -2295,7 +2295,7 @@ msgstr "Cuentas permitidas"
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Allows to tag analytic entries and to manage analytic distributions"
 msgstr ""
-"Permite etiquetar centro de costos y gestionar distribuciones en centro de costos"
+"Permite etiquetar Centro de costos y gestionar distribuciones en Centro de costos"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_config_settings__module_l10n_fr_fec_import
@@ -2552,7 +2552,7 @@ msgstr "Cuenta analítica"
 #. module: account
 #: model:ir.ui.menu,name:account.account_analytic_group_menu
 msgid "Analytic Account Groups"
-msgstr "Grupos de centro de costos"
+msgstr "Grupos de Centro de costos"
 
 #. module: account
 #: model:ir.ui.menu,name:account.menu_analytic_accounting
@@ -2584,12 +2584,12 @@ msgstr "Valores analíticos por defecto"
 #: model:ir.actions.act_window,name:account.action_analytic_default_list
 #: model:ir.ui.menu,name:account.menu_analytic_default_list
 msgid "Analytic Defaults Rules"
-msgstr "Reglas por defecto para centro de costos"
+msgstr "Reglas por defecto para Centro de costos"
 
 #. module: account
 #: model:ir.model,name:account.model_account_analytic_default
 msgid "Analytic Distribution"
-msgstr "Distribución de centro de costos"
+msgstr "Distribución de Centro de costos"
 
 #. module: account
 #: model:ir.ui.menu,name:account.menu_action_analytic_lines_tree
@@ -2604,12 +2604,12 @@ msgstr "Línea de centro de costo"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_line_form
 msgid "Analytic Lines"
-msgstr "Líneas centro de costos"
+msgstr "Líneas Centro de costos"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.analytic_rule_action_user
 msgid "Analytic Rules"
-msgstr "Reglas en centro de costos"
+msgstr "Reglas en Centro de costos"
 
 #. module: account
 #: model:ir.model,name:account.model_account_analytic_tag
@@ -2619,12 +2619,12 @@ msgstr "Reglas en centro de costos"
 #: model:ir.model.fields,field_description:account.field_res_config_settings__group_analytic_tags
 #: model:ir.ui.menu,name:account.account_analytic_tag_menu
 msgid "Analytic Tags"
-msgstr "Etiquetas de centro de costos"
+msgstr "Etiquetas de Centro de costos"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_move_line__analytic_line_ids
 msgid "Analytic lines"
-msgstr "Líneas centro de costos"
+msgstr "Líneas Centro de costos"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
@@ -16286,7 +16286,7 @@ msgid ""
 "You can't set a different company on your analytic tags since there are some"
 " journal items linked to it."
 msgstr ""
-"No puedes establecer una empresa diferente en tus etiquetas de centro de costos ya "
+"No puedes establecer una empresa diferente en tus etiquetas de Centro de costos ya "
 "que hay algunos apuntes de diario vinculados a ella."
 
 #. module: account

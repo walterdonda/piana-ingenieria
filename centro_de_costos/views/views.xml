@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <!-- Lista centro de costos -->
+  <!-- Lista Centro de costos -->
   <record id="centro_de_costos" model="ir.ui.view">
     <field name="name">account.analytic.account.view.form.inherit</field>
     <field name="model">account.analytic.account</field>
@@ -26,7 +26,7 @@
 
     </field>
   </record>
-  <!-- Formulario centro de costos -->
+  <!-- Formulario Centro de costos -->
   <record id="centro_de_costos_form" model="ir.ui.view">
     <field name="name">account.analytic.account.view.formulario.inherit</field>
     <field name="model">account.analytic.account</field>
