@@ -2290,7 +2290,7 @@ msgstr "Cuentas permitidas"
 msgid "Allows to tag analytic entries and to manage analytic distributions"
 msgstr ""
 "Le permite etiquetar asientos analíticos y gestionar distribuciones "
-"centro de costos"
+Centro de costos"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_config_settings__module_l10n_fr_fec_import
@@ -2556,7 +2556,7 @@ msgstr "Contabilidad analítica"
 #. module: account
 #: model:ir.ui.menu,name:account.account_analytic_def_account
 msgid "Analytic Accounts"
-msgstr "centro de costos"
+msgstr Centro de costos"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax_template__analytic
