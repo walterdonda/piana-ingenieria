@@ -16,7 +16,7 @@
     """,
     "author": "Walter Donda",
     "category": "Services/Ingenieria",
-    "version": "15.0",
+    "version": "1.0",
     # any module necessary for this one to work correctly
     "depends": ["analytic"],
     # always loaded
