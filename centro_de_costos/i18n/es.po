@@ -17119,3 +17119,7 @@ msgstr ""
 "Un valor analítico predeterminado requiere al menos una cuenta analítica o "
 "una etiqueta analítica que sea usada para distribución analítica."
 
+#. module: analytic
+#: model_terms:ir.actions.act_window,help:analytic.account_analytic_group_action
+msgid "This allows you to classify your analytic accounts."
+msgstr "Esto te permite clasificar tus centro de costos."
