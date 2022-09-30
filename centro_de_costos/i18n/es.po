@@ -2547,7 +2547,7 @@ msgstr "Analítico"
 #: model_terms:ir.ui.view,arch_db:account.view_account_analytic_default_form_search
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_report_search_analytic_accounting
 msgid "Analytic Account"
-msgstr "Cuenta analítica"
+msgstr "Centro de costo"
 
 #. module: account
 #: model:ir.ui.menu,name:account.account_analytic_group_menu
@@ -17161,7 +17161,7 @@ msgstr "Importe"
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
 msgid "Analytic Account"
-msgstr "Cuenta analítica"
+msgstr "Centro de costo"
 
 #. module: analytic
 #: model:ir.model,name:analytic.model_account_analytic_distribution
@@ -17173,7 +17173,7 @@ msgstr "Distribución de cuenta analítica"
 #: model_terms:ir.ui.view,arch_db:analytic.account_analytic_group_form_view
 #: model_terms:ir.ui.view,arch_db:analytic.account_analytic_group_tree_view
 msgid "Analytic Account Groups"
-msgstr "Grupos de cuentas analíticas"
+msgstr "Grupos de Centro de costos"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_res_config_settings__group_analytic_accounting
@@ -17191,7 +17191,7 @@ msgstr "Etiquetas de contabilidad analítica"
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag__analytic_distribution_ids
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_list
 msgid "Analytic Accounts"
-msgstr "Cuentas analíticas"
+msgstr "Centro de costos"
 
 #. module: analytic
 #: model:ir.model,name:analytic.model_account_analytic_group
@@ -17224,7 +17224,7 @@ msgstr "Apuntes analíticos"
 #. module: analytic
 #: model:ir.model,name:analytic.model_account_analytic_line
 msgid "Analytic Line"
-msgstr "Línea analítica"
+msgstr "Línea de costos"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account__line_ids
@@ -17234,7 +17234,7 @@ msgstr "Líneas analíticas"
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag__name
 msgid "Analytic Tag"
-msgstr "Etiqueta analítica"
+msgstr "Etiqueta de costo"
 
 #. module: analytic
 #: model:ir.actions.act_window,name:analytic.account_analytic_tag_action
@@ -17282,7 +17282,7 @@ msgstr "Categoría"
 #. module: analytic
 #: model:ir.actions.act_window,name:analytic.action_analytic_account_form
 msgid "Chart of Analytic Accounts"
-msgstr "Plan de cuentas analíticas"
+msgstr "Plan de Centro de costos"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_group__children_ids
@@ -17292,7 +17292,7 @@ msgstr "Subordinados"
 #. module: analytic
 #: model_terms:ir.actions.act_window,help:analytic.account_analytic_group_action
 msgid "Click to add a new analytic account group."
-msgstr "Haz clic para agregar un nuevo grupo de cuentas analíticas."
+msgstr "Haz clic para agregar un nuevo grupo de Centro de costos."
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag__color
@@ -17658,7 +17658,7 @@ msgstr ""
 #. module: analytic
 #: model_terms:ir.actions.act_window,help:analytic.account_analytic_group_action
 msgid "This allows you to classify your analytic accounts."
-msgstr "Esto te permite clasificar tus cuentas analíticas."
+msgstr "Esto te permite clasificar tus Centro de costos."
 
 #. module: analytic
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_line_tree
