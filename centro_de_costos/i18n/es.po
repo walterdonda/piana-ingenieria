@@ -3054,12 +3054,6 @@ msgid ""
 msgstr ""
 "Tipo de cuenta bancaria: Normal o IBAN. Se infiere del número de cuenta."
 
-#. module: account
-#: model:account.account.type,name:account.data_account_type_liquidity
-#: model:ir.actions.act_window,name:account.action_account_moves_journal_bank_cash
-#: model:ir.ui.menu,name:account.menu_action_account_moves_journal_bank_cash
-msgid "Bank and Cash"
-msgstr "Banco y efectivo"
 
 #. module: account
 #: model:ir.model,name:account.model_account_setup_bank_manual_config
@@ -17485,7 +17479,7 @@ msgstr "Entrada en el Diario de Crédito"
 #. module: account_ux
 #: model:ir.model.fields,field_description:account_ux.field_account_change_currency__currency_from_id
 msgid "Currency From"
-msgstr ""
+msgstr "Moneda"
 
 #. module: account_ux
 #: model:ir.model,name:account_ux.model_res_currency_rate
@@ -17502,12 +17496,12 @@ msgstr "Moneda cambiada de %s a %s con tasa %s"
 #. module: account_ux
 #: model:ir.model.fields,help:account_ux.field_account_change_currency__currency_from_id
 msgid "Currency from Invoice"
-msgstr ""
+msgstr "Moneda de la factura"
 
 #. module: account_ux
 #: model:ir.model.fields,field_description:account_ux.field_account_change_currency__currency_to_id
 msgid "Currency to"
-msgstr ""
+msgstr "Pasar A"
 
 #. module: account_ux
 #: model_terms:ir.ui.view,arch_db:account_ux.view_account_partial_reconcile_search
@@ -17712,7 +17706,7 @@ msgstr ""
 #. module: account_ux
 #: model:ir.model.fields,help:account_ux.field_account_change_currency__currency_to_id
 msgid "Select a currency to apply on the invoice"
-msgstr ""
+msgstr "Seleccionar una moneda a aplicar a la factura"
 
 #. module: account_ux
 #: model:ir.model.fields,help:account_ux.field_account_change_currency__currency_rate
@@ -17798,7 +17792,7 @@ msgstr "Este formulario cambia la moneda de la factura"
 #. module: account_ux
 #: model_terms:ir.ui.view,arch_db:account_ux.view_move_line_tree_grouped_partner
 msgid "Total Residual"
-msgstr ""
+msgstr "Importe total residual"
 
 #. module: account_ux
 #: model_terms:ir.ui.view,arch_db:account_ux.view_move_form
@@ -17808,7 +17802,7 @@ msgstr ""
 #. module: account_ux
 #: model:ir.model.fields.selection,name:account_ux.selection__account_change_currency__change_type__value
 msgid "Update both currency and values"
-msgstr ""
+msgstr "Actualizar la moneda y la tasa de cambio"
 
 
 
@@ -17816,19 +17810,19 @@ msgstr ""
 #: code:addons/account_ux/models/account_move_line.py:0
 #, python-format
 msgid "View Bank Statement"
-msgstr ""
+msgstr "Ver movimiento bancario"
 
 #. module: account_ux
 #: code:addons/account_ux/models/account_move_line.py:0
 #, python-format
 msgid "View Move"
-msgstr ""
+msgstr "Ver movimiento"
 
 #. module: account_ux
 #: code:addons/account_ux/models/account_move_line.py:0
 #, python-format
 msgid "View Payment"
-msgstr ""
+msgstr "Ver Pago"
 
 #. module: account_ux
 #: model_terms:ir.ui.view,arch_db:account_ux.view_move_form
@@ -17874,3 +17868,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_ux.view_account_change_currency
 msgid "or"
 msgstr "o"
+
+#. module: account_payment_group
+#: model:ir.ui.menu,name:account_payment_group.menu_finance_bank_and_cash
+msgid "Bank and Cash"
+msgstr "Transf. y Cheques"
