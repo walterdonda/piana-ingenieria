@@ -13,6 +13,9 @@ class CentroDeCostos(models.Model):
         tracking=True,
         help="Presupuesto del proyecto",
     )
+
+    balance = fields.Monetary(string="Margen financiero")
+
     margin_project = fields.Monetary(
         compute="_compute_margin_project",
         string="Margen de proyecto",
@@ -29,9 +32,9 @@ class CentroDeCostos(models.Model):
         readonly=True,
     )
 
-    @api.depends("budget_project", "balance")
+    @api.depends("margin_project", "credit")
     def _compute_outstanding_invoice_amount(self):
         for record in self:
             record["outstanding_invoice_amount"] = (
-                record["budget_project"] - record["balance"]
+                record["margin_project"] - record["credit"]
             )
