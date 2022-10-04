@@ -2309,7 +2309,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Allows you to use the analytic accounting."
-msgstr "Te permite usar la contabilidad de centro de costo."
+msgstr "Te permite usar la contabilidad analítica."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__always_tax_exigible
@@ -2520,7 +2520,7 @@ msgid ""
 "An analytic default requires at least an analytic account or an analytic "
 "tag."
 msgstr ""
-"Un valor predeterminado analítico requiere al menos una centro de costo o "
+"Un valor predeterminado analítico requiere al menos una cuenta analítica o "
 "una etiqueta analítica. "
 
 #. module: account
@@ -2539,25 +2539,15 @@ msgid "Analytic"
 msgstr "Analítico"
 
 #. module: account
-#: model:ir.actions.act_window,name:analytic.action_account_analytic_account_form
 #: model:ir.model,name:account.model_account_analytic_account
 #: model:ir.model.fields,field_description:account.field_account_analytic_default__analytic_id
 #: model:ir.model.fields,field_description:account.field_account_invoice_report__analytic_account_id
 #: model:ir.model.fields,field_description:account.field_account_move_line__analytic_account_id
 #: model:ir.model.fields,field_description:account.field_account_reconcile_model_line__analytic_account_id
-#: model:ir.model.fields,field_description:analytic.field_account_analytic_account__name
-#: model:ir.model.fields,field_description:analytic.field_account_analytic_distribution__account_id
-#: model:ir.model.fields,field_description:analytic.field_account_analytic_line__account_id
-#: model:ir.model.fields,field_description:project.field_project_task__analytic_account_id
-#: model:ir.model.fields,field_description:project.field_project_project__analytic_account_id
-#: model:ir.model.fields,field_description:analytic.field_account_analytic_tag__analytic_distribution_ids
 #: model_terms:ir.ui.view,arch_db:account.view_account_analytic_default_form_search
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_report_search_analytic_accounting
-#: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_form
-#: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
-#: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
-#: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_list
-
+#: model:ir.model.fields,field_description:project.field_project_task__analytic_account_id
+#: model:ir.model.fields,field_description:project.field_project_project__analytic_account_id
 msgid "Analytic Account"
 msgstr "Centro de costo"
 
@@ -2573,9 +2563,8 @@ msgstr "Centro de costos"
 
 #. module: account
 #: model:ir.ui.menu,name:account.account_analytic_def_account
-#: model:ir.actions.act_window,name:analytic.action_account_analytic_account_form
 msgid "Analytic Accounts"
-msgstr "Centros de costos"
+msgstr "Centro de costos"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax_template__analytic
@@ -6818,7 +6807,7 @@ msgid ""
 "analytic account as the invoice line (if any)"
 msgstr ""
 "Si está establecido, el importe calculado por este impuesto se asignará a la"
-" misma centro de costo de la línea de factura (si la hay)"
+" misma cuenta analítica de la línea de factura (si la hay)"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_tax_report_line__is_carryover_used_in_balance
@@ -9934,6 +9923,12 @@ msgid "Parent Message"
 msgstr "Mensaje padre"
 
 #. module: account
+#: model:ir.model.fields,field_description:account.field_account_group__parent_path
+#: model:ir.model.fields,field_description:account.field_account_tax_report_line__parent_path
+msgid "Parent Path"
+msgstr "Ruta padre"
+
+#. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid "Partial"
 msgstr "Parcial"
@@ -11784,10 +11779,10 @@ msgid ""
 "default (e.g. create new customer invoice or Sales order if we select this "
 "company, it will automatically take this as an analytic account)"
 msgstr ""
-"Seleccione una empresa que utilizará la centro de costo especificada en el "
+"Seleccione una empresa que utilizará la cuenta analítica especificada en el "
 "análisis por defecto (por ejemplo, creando una nueva factura de cliente o "
 "una orden de ventas, si seleccionamos esta empresa, automáticamente la "
-"tomará como una centro de costo)"
+"tomará como una cuenta analítica)"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_analytic_default__partner_id
@@ -11796,10 +11791,10 @@ msgid ""
 "default (e.g. create new customer invoice or Sales order if we select this "
 "partner, it will automatically take this as an analytic account)"
 msgstr ""
-"Seleccione la empresa que utilizará la centro de costo especificada en el "
+"Seleccione la empresa que utilizará la cuenta analítica especificada en el "
 "valor por defecto (por ejemplo, creando una nueva factura de cliente o un "
 "pedido de venta, si seleccionamos esta empresa, automáticamente utilizará "
-"esta centro de costo)"
+"esta cuenta analítica)"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_analytic_default__product_id
@@ -11808,17 +11803,17 @@ msgid ""
 "default (e.g. create new customer invoice or Sales order if we select this "
 "product, it will automatically take this as an analytic account)"
 msgstr ""
-"Selecciona un producto que utilizará la centro de costo especificada en el "
+"Selecciona un producto que utilizará la cuenta analítica especificada en el "
 "análisis por defecto (por ejemplo, creando una nueva factura de cliente o "
 "una orden de venta, si seleccionamos este producto, automáticamente lo "
-"tomará como una centro de costo)"
+"tomará como una cuenta analítica)"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_analytic_default__user_id
 msgid ""
 "Select a user which will use analytic account specified in analytic default."
 msgstr ""
-"Selecciona un usuario que usará la centro de costo especificada en el "
+"Selecciona un usuario que usará la cuenta analítica especificada en el "
 "análisis por defecto."
 
 #. module: account
@@ -11828,10 +11823,10 @@ msgid ""
 "analytic default (e.g. create new customer invoice or Sales order if we "
 "select this account, it will automatically take this as an analytic account)"
 msgstr ""
-"Selecciona una cuenta contable que utilizará la centro de costo "
+"Selecciona una cuenta contable que utilizará la cuenta analítica "
 "especificada en el análisis por defecto (por ejemplo, creando una nueva "
 "factura de cliente o una orden de venta si seleccionamos esta cuenta, se "
-"tomará automáticamente como una centro de costo)"
+"tomará automáticamente como una cuenta analítica)"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -14817,7 +14812,7 @@ msgstr ""
 "Esto permite a los contadores manejar presupuestos analíticos y cruzados. "
 "Una vez que se definen los presupuestos maestros y los presupuestos, los "
 "administradores del proyecto pueden establecer el importe planificado en "
-"cada centro de costo."
+"cada cuenta analítica."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_config_settings__module_account_batch_payment
@@ -16273,7 +16268,7 @@ msgid ""
 "You can't set a different company on your analytic account since there are "
 "some journal items linked to it."
 msgstr ""
-"No puedes establecer una empresa diferente en tu centro de costo ya que hay"
+"No puedes establecer una empresa diferente en tu cuenta analítica ya que hay"
 " algunos apuntes de diario vinculados a ella."
 
 #. module: account
@@ -17113,13 +17108,13 @@ msgid ""
 "An analytic default requires an analytic account or an analytic tag used for"
 " analytic distribution."
 msgstr ""
-"Un valor analítico predeterminado requiere al menos una centro de costo o "
+"Un valor analítico predeterminado requiere al menos una cuenta analítica o "
 "una etiqueta analítica que sea usada para distribución analítica."
 
 #. module: analytic
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_form
 msgid "<span class=\"o_stat_text\">Gross Margin</span>"
-msgstr "<span class=\"o_stat_text\">Margen Financiero</span>"
+msgstr "<span class=\"o_stat_text\">Margen bruto</span>"
 
 
 
@@ -17128,7 +17123,7 @@ msgstr "<span class=\"o_stat_text\">Margen Financiero</span>"
 #: model_terms:ir.actions.act_window,help:analytic.action_account_analytic_account_form
 #: model_terms:ir.actions.act_window,help:analytic.action_analytic_account_form
 msgid "Add a new analytic account"
-msgstr "Agregar centro de costo para el proyecto"
+msgstr "Agregar una nueva cuenta analítica"
 
 #. module: analytic
 #: model_terms:ir.actions.act_window,help:analytic.account_analytic_tag_action
@@ -17138,14 +17133,14 @@ msgstr "Añadir nueva etiqueta"
 #. module: analytic
 #: model:ir.model,name:analytic.model_account_analytic_distribution
 msgid "Analytic Account Distribution"
-msgstr "Distribución de centro de costo"
+msgstr "Distribución de cuenta analítica"
 
 
 
 #. module: analytic
 #: model:res.groups,name:analytic.group_analytic_tags
 msgid "Analytic Accounting Tags"
-msgstr "Etiquetas de contabilidad de centro de costo"
+msgstr "Etiquetas de contabilidad analítica"
 
 
 
@@ -17590,7 +17585,7 @@ msgid ""
 "If True, then an analytic account will be required when posting journal "
 "entries with this type of account."
 msgstr ""
-"Si es verdadero, se requerirá una centro de costo al publicar entradas de "
+"Si es verdadero, se requerirá una cuenta analítica al publicar entradas de "
 "diario con este tipo de cuenta."
 
 #. module: account_ux
@@ -17745,7 +17740,7 @@ msgid ""
 "* Accounts: %s\n"
 "* Move lines ids: %s"
 msgstr ""
-"Algunas líneas de movimiento no tienen una centro de costo y estas cuentas requieren una centro de costo.\n"
+"Algunas líneas de movimiento no tienen una cuenta analítica y estas cuentas requieren una cuenta analítica.\n"
 " * Cuentas:%s \n"
 "* Mover líneas ids:%s"
 
@@ -17898,3 +17893,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:project.field_project_task__project_analytic_account_id
 msgid "Project Analytic Account"
 msgstr "Centro de costo del proyecto"
+
