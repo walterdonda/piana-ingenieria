@@ -2573,8 +2573,9 @@ msgstr "Centro de costos"
 
 #. module: account
 #: model:ir.ui.menu,name:account.account_analytic_def_account
+#: model:ir.actions.act_window,name:analytic.action_account_analytic_account_form
 msgid "Analytic Accounts"
-msgstr "Centro de costos"
+msgstr "Centros de costos"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax_template__analytic
