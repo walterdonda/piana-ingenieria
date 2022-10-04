@@ -2541,7 +2541,6 @@ msgstr "Analítico"
 #. module: account
 #: model:ir.actions.act_window,name:analytic.action_account_analytic_account_form
 #: model:ir.model,name:account.model_account_analytic_account
-#: model:ir.model,name:account_analytic_parent.model_account_analytic_account
 #: model:ir.model.fields,field_description:account.field_account_analytic_default__analytic_id
 #: model:ir.model.fields,field_description:account.field_account_invoice_report__analytic_account_id
 #: model:ir.model.fields,field_description:account.field_account_move_line__analytic_account_id
