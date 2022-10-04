@@ -6,7 +6,7 @@
         """,
     "description": """
         Este módulo permite hacer el seguimiento de la facturación de c/u de la empresa.
-        
+
         A cada proyecto se le asigna un centro de costo o una jerarquía del mismo. 
         Para esto se modifica el modelo de odoo cuenta analítica y se le agregan los siguientes campos:
         
@@ -22,7 +22,7 @@
     "category": "Services/Ingenieria",
     "version": "1.0",
     # Este módulo depende de los siguientes módulos de odoo 15
-    "depends": ["base", "account", "analytic"],
+    "depends": ["base", "account", "analytic", "account_analytic_parent"],
     # Se cargan los datos de acceso
     "data": [
         "security/ir.model.access.csv",
