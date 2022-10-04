@@ -2539,6 +2539,7 @@ msgid "Analytic"
 msgstr "Analítico"
 
 #. module: account
+#: model:ir.actions.act_window,name:analytic.action_account_analytic_account_form
 #: model:ir.model,name:account.model_account_analytic_account
 #: model:ir.model.fields,field_description:account.field_account_analytic_default__analytic_id
 #: model:ir.model.fields,field_description:account.field_account_invoice_report__analytic_account_id
@@ -2549,11 +2550,13 @@ msgstr "Analítico"
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line__account_id
 #: model:ir.model.fields,field_description:project.field_project_task__analytic_account_id
 #: model:ir.model.fields,field_description:project.field_project_project__analytic_account_id
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_tag__analytic_distribution_ids
 #: model_terms:ir.ui.view,arch_db:account.view_account_analytic_default_form_search
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_report_search_analytic_accounting
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_form
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
+#: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_list
 
 msgid "Analytic Account"
 msgstr "Centro de costo"
