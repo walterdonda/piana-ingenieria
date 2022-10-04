@@ -2541,6 +2541,7 @@ msgstr "Analítico"
 #. module: account
 #: model:ir.actions.act_window,name:analytic.action_account_analytic_account_form
 #: model:ir.model,name:account.model_account_analytic_account
+#: model:ir.model,name:account_analytic_parent.model_account_analytic_account
 #: model:ir.model.fields,field_description:account.field_account_analytic_default__analytic_id
 #: model:ir.model.fields,field_description:account.field_account_invoice_report__analytic_account_id
 #: model:ir.model.fields,field_description:account.field_account_move_line__analytic_account_id
@@ -9932,12 +9933,6 @@ msgstr "Línea padre"
 #: model:ir.model.fields,field_description:account.field_account_invoice_send__parent_id
 msgid "Parent Message"
 msgstr "Mensaje padre"
-
-#. module: account
-#: model:ir.model.fields,field_description:account.field_account_group__parent_path
-#: model:ir.model.fields,field_description:account.field_account_tax_report_line__parent_path
-msgid "Parent Path"
-msgstr "Ruta padre"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -17905,3 +17900,30 @@ msgstr ""
 msgid "Project Analytic Account"
 msgstr "Centro de costo del proyecto"
 
+#. module: account_analytic_parent
+#: model:ir.model.fields,field_description:account_analytic_parent.field_account_analytic_account__child_ids
+msgid "Child Accounts"
+msgstr "Centro de costo hijo"
+
+#. module: account_analytic_parent
+#: model:ir.model.fields,field_description:account_analytic_parent.field_account_analytic_account__parent_id
+#: model_terms:ir.ui.view,arch_db:account_analytic_parent.view_account_analytic_account_form
+msgid "Parent Analytic Account"
+msgstr "Centro de costo padre"
+
+#. module: account_analytic_parent
+#: model:ir.model.fields,field_description:account_analytic_parent.field_account_analytic_account__parent_path
+msgid "Parent Path"
+msgstr "Ruta de centro de costo padre"
+
+#. module: account_analytic_parent
+#: code:addons/account_analytic_parent/models/account_analytic_account.py:0
+#, python-format
+msgid "Please activate first parent account %s"
+msgstr "Por favor primero activa el centro de costo padre %s"
+
+#. module: account_analytic_parent
+#: code:addons/account_analytic_parent/models/account_analytic_account.py:0
+#, python-format
+msgid "You can not create recursive analytic accounts."
+msgstr "No puede crear centro de costo recursivos."
