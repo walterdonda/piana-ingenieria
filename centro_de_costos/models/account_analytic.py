@@ -21,6 +21,17 @@ class CentroDeCostos(models.Model):
         string="Margen de proyecto",
     )
 
+    def name_get(self):
+        res = []
+        for analytic in self:
+            name = analytic.name
+            if analytic.code:
+                name = "[" + analytic.code + "] " + name
+            if analytic.partner_id.commercial_partner_id.name:
+                name = analytic.partner_id.commercial_partner_id.name + " - " + name
+            res.append((analytic.id, name))
+        return res
+
     @api.depends("budget_project", "debit")
     def _compute_margin_project(self):
         for record in self:
