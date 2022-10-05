@@ -17357,6 +17357,13 @@ msgstr "Categoría de UdM"
 msgid "e.g. Project XYZ"
 msgstr "Ej. Proyecto XYZ"
 
+#. module: analytic
+#: model:ir.actions.act_window,name:analytic.action_account_analytic_account_form
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_tag__analytic_distribution_ids
+#: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_list
+msgid "Analytic Accounts"
+msgstr "Centros de costos"
+
 
 
 #. module: account_ux
