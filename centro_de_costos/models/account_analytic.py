@@ -43,9 +43,9 @@ class CentroDeCostos(models.Model):
         readonly=True,
     )
 
-    @api.depends("margin_project", "credit")
+    @api.depends("budget_project", "credit")
     def _compute_outstanding_invoice_amount(self):
         for record in self:
             record["outstanding_invoice_amount"] = (
-                record["margin_project"] - record["credit"]
+                record["budget_project"] - record["credit"]
             )
