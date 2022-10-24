@@ -1,3 +1,4 @@
+from sre_parse import State
 from odoo import api, fields, models
 
 
@@ -49,3 +50,13 @@ class CentroDeCostos(models.Model):
             record["outstanding_invoice_amount"] = (
                 record["budget_project"] - record["credit"]
             )
+
+    state = fields.Char(compute="_compute_state", string="Estado")
+
+    @api.depends("outstanding_invoice_amount")
+    def _compute_state(self):
+        for record in self:
+            if record["outstanding_invoice_amount"] == 0:
+                record["state"] = "Totalmente Facturado"
+            else:
+                record["state"] = "Pendiente de Facturar"

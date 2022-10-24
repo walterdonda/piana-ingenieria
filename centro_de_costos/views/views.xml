@@ -6,30 +6,40 @@
     <field name="model">account.analytic.account</field>
     <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
     <field name="arch" type="xml">
+
       <field name="credit" position="replace">
         <field name="credit" string="Fac. a Clientes" sum="credit" />
       </field>
+
       <field name="debit" position="replace">
         <field name="debit" string="Fac. de Provedores" sum="debit" />
       </field>
+
       <field name="balance" position="replace">
         <field name="balance" string="Margen actual" sum="balance" />
       </field>
+
+      <field name="balance" position="after">
+        <field name="state" widget="badge" decoration-info="state == 'Totalmente Facturado'" decoration-danger="state == 'Pendiente de Facturar'" optional="show"/>
+      </field>
+
       <field name="code" position="after">
         <field name="budget_project" sum = "budget_project" />
         <field name="outstanding_invoice_amount" string="Pendiente a facturar" widget="Monetary" sum="outstanding_invoice_amount" />
         <field name="margin_project" string="Margen proyecto" widget="Monetary" sum="margin_project" />
-
       </field>
+
       <field name="credit" position="after">
         <field name="debit" position="move" />
       </field>
+
       <field name="complete_name" position="before">
         <field name="partner_id" position="move" />
       </field>
 
     </field>
   </record>
+
   <!-- Formulario Centro de costos -->
   <record id="centro_de_costos_form" model="ir.ui.view">
     <field name="name">account.analytic.account.view.formulario.inherit</field>
