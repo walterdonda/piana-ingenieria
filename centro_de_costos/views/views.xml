@@ -61,6 +61,10 @@
           <field string="Facturado" name="credit" widget="statinfo"/>
         </button>
       </xpath>
+      <xpath expr="//widget[@name='web_ribbon']" position="after">
+        <widget name="web_ribbon" title="Pendiente de facturar" bg_color="bg-danger" attrs="{'invisible': [('state', '!=', 'Pendiente de Facturar')]}"/>
+        <widget name="web_ribbon" title="Totalmente Facturado!" attrs="{'invisible': [('state', '=', 'Pendiente de Facturar')]}"/>
+      </xpath>
     </field>
   </record>
 
