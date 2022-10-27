@@ -16,7 +16,7 @@
       </field>
 
       <field name="balance" position="replace">
-        <field name="balance" string="Margen actual" sum="balance" />
+        <field name="balance" string="Margen neto" sum="balance" />
       </field>
 
       <field name="balance" position="after">
