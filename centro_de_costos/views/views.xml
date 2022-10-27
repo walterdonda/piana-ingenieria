@@ -48,6 +48,7 @@
     <field name="arch" type="xml">
       <field name="partner_id" position="after">
         <field name="budget_project" widget="Monetary" />
+        <field name="state"/>
       </field>
       <field name="group_id" position="after">
         <field name="outstanding_invoice_amount" widget="Monetary" />
