@@ -21,6 +21,12 @@ class CentroDeCostos(models.Model):
         compute="_compute_margin_project",
         string="Margen de proyecto",
     )
+    updatable_by_index = fields.Boolean(
+        string="Actualizable por índice externo",
+        tracking=True,
+        help="Indica si el pendiente de facturar es actualizable por un índice",
+        default=False,
+    )
 
     def name_get(self):
         res = []
@@ -41,7 +47,9 @@ class CentroDeCostos(models.Model):
     outstanding_invoice_amount = fields.Monetary(
         compute="_compute_outstanding_invoice_amount",
         string="Pendiente de facturación",
-        readonly=True,
+        search="search_outstanding_invoice_amount",
+        inverse="inverse_outstanding_invoice_amount",
+        store=True,
     )
 
     @api.depends("budget_project", "credit")
@@ -49,6 +57,16 @@ class CentroDeCostos(models.Model):
         for record in self:
             record["outstanding_invoice_amount"] = (
                 record["budget_project"] - record["credit"]
+            )
+
+    def search_outstanding_invoice_amount(self, operator, value):
+        return [("outstanding_invoice_amount", operator, value)]
+
+    @api.depends("outstanding_invoice_amount", "credit")
+    def inverse_outstanding_invoice_amount(self):
+        for record in self:
+            record["budget_project"] = (
+                record["outstanding_invoice_amount"] + record["credit"]
             )
 
     state = fields.Char(compute="_compute_state", string="Estado")
