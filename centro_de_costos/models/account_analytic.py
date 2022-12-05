@@ -59,15 +59,15 @@ class CentroDeCostos(models.Model):
                 record["budget_project"] - record["credit"]
             )
 
-    def search_outstanding_invoice_amount(self, operator, value):
-        return [("outstanding_invoice_amount", operator, value)]
-
     @api.depends("outstanding_invoice_amount", "credit")
     def inverse_outstanding_invoice_amount(self):
         for record in self:
             record["budget_project"] = (
                 record["outstanding_invoice_amount"] + record["credit"]
             )
+
+    def search_outstanding_invoice_amount(self, operator, value):
+        return [("outstanding_invoice_amount", operator, value)]
 
     state = fields.Char(compute="_compute_state", string="Estado")
 
