@@ -1,5 +1,6 @@
 from sre_parse import State
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class CentroDeCostos(models.Model):
@@ -38,6 +39,10 @@ class CentroDeCostos(models.Model):
                 name = analytic.partner_id.commercial_partner_id.name + " - " + name
             res.append((analytic.id, name))
         return res
+
+    def action_update_by_index(self):
+        if self.updatable_by_index:
+            raise ValidationError("Salida de la función actualizar")
 
     @api.depends("budget_project", "debit")
     def _compute_margin_project(self):
