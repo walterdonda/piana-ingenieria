@@ -51,16 +51,20 @@
         <field name="budget_project" widget="Monetary" />
         <field name="state" invisible='1'/>
       </field>
+      <field name="state" position="after">
+        <field name="updatable_by_index"/>
+      </field>
       <field name="group_id" position="after">
         <field name="outstanding_invoice_amount" widget="Monetary" />
       </field>
+
       <xpath expr="//form/*" position="before">
         <header>
           <button string="Actualizar por índice" name="action_update_by_index" type="object" class="oe_highlight"/>
         </header>
       </xpath>
       <xpath expr="//button[@name='153']" position="after">
-        <button string="Actualizar por índice" name="action_update_by_index" type="object" class="oe_highlight"/>
+
         <button class="oe_stat_button" type="action" name="216" icon="fa-file-text-o">
           <field string="Proveedores" name="debit" widget="statinfo"/>
         </button>
