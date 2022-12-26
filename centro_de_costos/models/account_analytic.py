@@ -83,14 +83,3 @@ class CentroDeCostos(models.Model):
                 record["state"] = "Totalmente Facturado"
             else:
                 record["state"] = "Pendiente de Facturar"
-
-    update_index_ids = fields.Many2many(
-        "update.index", string="Índices de actualización"
-    )
-
-    def update_pending_billing(self):
-        for record in self:
-            compound_interest_rate = 1
-            for update_index in record.update_index_ids:
-                compound_interest_rate *= 1 + update_index.interest_rate / 100
-            record.outstanding_invoice_amount *= compound_interest_rate

@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from . import account_analytic, update_index
+from . import account_analytic
