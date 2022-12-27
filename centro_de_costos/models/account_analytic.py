@@ -88,10 +88,20 @@ class CentroDeCostos(models.Model):
         string="Total facturado", compute="_compute_total_facturado"
     )
 
-    @api.depends("line_ids.amount")
+    @api.depends("line_ids")
     def _compute_total_facturado(self):
         for record in self:
-            record.total_facturado = sum(record.line_ids.mapped("amount"))
+            # Obtener las líneas de facturas de cliente relacionadas con la cuenta analítica
+            lines = self.env["account.move.line"].search(
+                [
+                    ("analytic_account_id", "=", self.id),
+                    ("journal_id.type", "=", "sale"),
+                ]
+            )
+            # Resto de las facturas cliente las notas de crédito
+            record.total_facturado = sum(lines.mapped("credit")) - sum(
+                lines.mapped("debit")
+            )
 
     total_facturado_proveedores = fields.Monetary(
         string="Total facturado a proveedores",
