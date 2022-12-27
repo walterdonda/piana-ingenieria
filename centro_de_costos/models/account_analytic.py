@@ -83,3 +83,30 @@ class CentroDeCostos(models.Model):
                 record["state"] = "Totalmente Facturado"
             else:
                 record["state"] = "Pendiente de Facturar"
+
+    total_facturado = fields.Monetary(
+        string="Total facturado", compute="_compute_total_facturado"
+    )
+
+    @api.depends("line_ids.amount")
+    def _compute_total_facturado(self):
+        for record in self:
+            record.total_facturado = sum(record.line_ids.mapped("amount"))
+
+    total_facturado_proveedores = fields.Monetary(
+        string="Total facturado a proveedores",
+        compute="_compute_total_facturado_proveedores",
+    )
+
+    @api.depends("line_ids")
+    def _compute_total_facturado_proveedores(self):
+        for record in self:
+            # Obtener las líneas de facturas de proveedor relacionadas con la cuenta analítica
+            lines = self.env["account.move.line"].search(
+                [
+                    ("analytic_account_id", "=", self.id),
+                    ("journal_id.type", "=", "purchase"),
+                ]
+            )
+            # Calcular el total facturado a proveedores a partir de la suma de los montos de las líneas
+            record.total_facturado_proveedores = sum(lines.mapped("debit"))

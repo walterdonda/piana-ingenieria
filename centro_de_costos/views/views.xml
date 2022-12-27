@@ -55,6 +55,8 @@
         <field name="updatable_by_index"/>
       </field>
       <field name="group_id" position="after">
+        <field name="total_facturado" widget="Monetary" />
+        <field name="total_facturado_proveedores" widget="Monetary" />
         <field name="outstanding_invoice_amount" widget="Monetary" />
       </field>
 
