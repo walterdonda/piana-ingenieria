@@ -52,30 +52,22 @@
         <field name="state" invisible='1'/>
       </field>
       <field name="state" position="after">
-        <field name="updatable_by_index"/>
+        <field name="updatable_by_index" invisible='1' />
       </field>
-      <field name="group_id" position="after">
-        <field name="total_facturado" widget="Monetary" />
-        <field name="total_facturado_proveedores" widget="Monetary" />
-        <field name="outstanding_invoice_amount" widget="Monetary" />
+      <field name="budget_project" position="after">
+        <field name="total_facturado" string="Total Facturado a cliente" widget="Monetary" />
+        <field name="outstanding_invoice_amount" string="Pendiente a facturar" widget="Monetary" />
+        <field name="total_facturado_proveedores" string="Total Facturado por proveedores" widget="Monetary" />
       </field>
 
       <xpath expr="//form/*" position="before">
         <header>
-          <button string="Actualizar por índice" name="action_update_by_index" type="object" class="oe_highlight"/>
+          <button string="Actualizar por índice" name="action_update_by_index" type="object" class="oe_highlight" invisible='1'/>
         </header>
       </xpath>
-      <xpath expr="//button[@name='153']" position="after">
 
-        <button class="oe_stat_button" type="action" name="216" icon="fa-file-text-o">
-          <field string="Proveedores" name="debit" widget="statinfo"/>
-        </button>
-        <button class="oe_stat_button" type="action" name="214" icon="fa-file-text-o">
-          <field string="Facturado" name="credit" widget="statinfo"/>
-        </button>
-      </xpath>
       <xpath expr="//widget[@name='web_ribbon']" position="after">
-        <widget name="web_ribbon" title="Pendiente de facturar" bg_color="bg-danger" attrs="{'invisible': [('state', '!=', 'Pendiente de Facturar')]}"/>
+        <widget name="web_ribbon" title="Pendiente de Facturar" bg_color="bg-danger" attrs="{'invisible': [('state', '!=', 'Pendiente de Facturar')]}"/>
         <widget name="web_ribbon" title="Totalmente Facturado!" attrs="{'invisible': [('state', '=', 'Pendiente de Facturar')]}"/>
       </xpath>
     </field>
