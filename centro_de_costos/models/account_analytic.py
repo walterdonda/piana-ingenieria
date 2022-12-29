@@ -85,7 +85,7 @@ class CentroDeCostos(models.Model):
                 record["state"] = "Pendiente de Facturar"
 
     total_facturado = fields.Monetary(
-        string="Total facturado", compute="_compute_total_facturado"
+        string="Total facturado", compute="_compute_total_facturado", store=True
     )
 
     @api.depends("line_ids")
@@ -106,6 +106,7 @@ class CentroDeCostos(models.Model):
     total_facturado_proveedores = fields.Monetary(
         string="Total facturado a proveedores",
         compute="_compute_total_facturado_proveedores",
+        store=True,
     )
 
     @api.depends("line_ids")
