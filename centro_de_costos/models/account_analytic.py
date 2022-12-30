@@ -44,10 +44,12 @@ class CentroDeCostos(models.Model):
         if self.updatable_by_index:
             raise ValidationError("Salida de la función actualizar")
 
-    @api.depends("budget_project", "debit")
+    @api.depends("budget_project", "total_facturado_proveedores")
     def _compute_margin_project(self):
         for record in self:
-            record["margin_project"] = record["budget_project"] - record["debit"]
+            record["margin_project"] = (
+                record["budget_project"] - record["total_facturado_proveedores"]
+            )
 
     outstanding_invoice_amount = fields.Monetary(
         compute="_compute_outstanding_invoice_amount",
@@ -85,9 +87,7 @@ class CentroDeCostos(models.Model):
                 record["state"] = "Pendiente de Facturar"
 
     total_facturado = fields.Monetary(
-        string="Total facturado",
-        compute="_compute_total_facturado",
-        store=True,
+        string="Total facturado", compute="_compute_total_facturado", store=True
     )
 
     @api.depends("line_ids")
@@ -96,7 +96,7 @@ class CentroDeCostos(models.Model):
             # Obtener las líneas de facturas de cliente relacionadas con la cuenta analítica
             lines = self.env["account.move.line"].search(
                 [
-                    ("analytic_account_id", "=", self.id),
+                    ("analytic_account_id", "=", record.id),
                     ("journal_id.type", "=", "sale"),
                 ]
             )
@@ -117,7 +117,7 @@ class CentroDeCostos(models.Model):
             # Obtener las líneas de facturas de proveedor relacionadas con la cuenta analítica
             lines = self.env["account.move.line"].search(
                 [
-                    ("analytic_account_id", "=", self.id),
+                    ("analytic_account_id", "=", record.id),
                     ("journal_id.type", "=", "purchase"),
                 ]
             )
