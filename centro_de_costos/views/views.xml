@@ -25,6 +25,7 @@
 
       <field name="code" position="after">
         <field name="budget_project" sum = "budget_project" />
+        <!--  <field name="total_facturado" sum = "total_facturado" /> -->
         <field name="outstanding_invoice_amount" string="Pendiente a facturar" widget="Monetary" sum="outstanding_invoice_amount" />
         <field name="margin_project" string="Margen proyecto" widget="Monetary" sum="margin_project" />
       </field>

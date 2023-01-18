@@ -22,6 +22,14 @@ class CentroDeCostos(models.Model):
         compute="_compute_margin_project",
         string="Margen de proyecto",
     )
+
+    @api.depends("total_facturado", "total_facturado_proveedores")
+    def _compute_margin_project(self):
+        for record in self:
+            record["margin_project"] = (
+                record["total_facturado"] - record["total_facturado_proveedores"]
+            )
+
     updatable_by_index = fields.Boolean(
         string="Actualizable por índice externo",
         tracking=True,
@@ -44,11 +52,23 @@ class CentroDeCostos(models.Model):
         if self.updatable_by_index:
             raise ValidationError("Salida de la función actualizar")
 
-    @api.depends("budget_project", "total_facturado_proveedores")
-    def _compute_margin_project(self):
+    total_facturado = fields.Monetary(
+        string="Total facturado", compute="_compute_total_facturado", store=True
+    )
+
+    @api.depends("line_ids")
+    def _compute_total_facturado(self):
         for record in self:
-            record["margin_project"] = (
-                record["budget_project"] - record["total_facturado_proveedores"]
+            # Obtener las líneas de facturas de cliente relacionadas con la cuenta analítica
+            lines = self.env["account.move.line"].search(
+                [
+                    ("analytic_account_id", "=", record.id),
+                    ("journal_id.type", "=", "sale"),
+                ]
+            )
+            # Resto de las facturas cliente las notas de crédito
+            record.total_facturado = sum(lines.mapped("credit")) - sum(
+                lines.mapped("debit")
             )
 
     outstanding_invoice_amount = fields.Monetary(
@@ -85,25 +105,6 @@ class CentroDeCostos(models.Model):
                 record["state"] = "Totalmente Facturado"
             else:
                 record["state"] = "Pendiente de Facturar"
-
-    total_facturado = fields.Monetary(
-        string="Total facturado", compute="_compute_total_facturado", store=True
-    )
-
-    @api.depends("line_ids")
-    def _compute_total_facturado(self):
-        for record in self:
-            # Obtener las líneas de facturas de cliente relacionadas con la cuenta analítica
-            lines = self.env["account.move.line"].search(
-                [
-                    ("analytic_account_id", "=", record.id),
-                    ("journal_id.type", "=", "sale"),
-                ]
-            )
-            # Resto de las facturas cliente las notas de crédito
-            record.total_facturado = sum(lines.mapped("credit")) - sum(
-                lines.mapped("debit")
-            )
 
     total_facturado_proveedores = fields.Monetary(
         string="Total facturado a proveedores",
