@@ -8,15 +8,15 @@
     <field name="arch" type="xml">
 
       <field name="credit" position="replace">
-        <field name="credit" string="Fac. a Clientes" sum="credit" />
+        <field name="total_facturado" string="Fac. a Clientes" sum="total_facturado" />
       </field>
 
       <field name="debit" position="replace">
-        <field name="debit" string="Fac. de Provedores" sum="debit" />
+        <field name="total_facturado_proveedores" string="Fac. de Provedores" sum="total_facturado_proveedores" />
       </field>
 
       <field name="balance" position="replace">
-        <field name="balance" string="Margen neto" sum="balance" />
+        <field name="balance" string="Margen proyecto" sum="balance" />
       </field>
 
       <field name="balance" position="after">
@@ -25,13 +25,11 @@
 
       <field name="code" position="after">
         <field name="budget_project" sum = "budget_project" />
-        <!--  <field name="total_facturado" sum = "total_facturado" /> -->
         <field name="outstanding_invoice_amount" string="Pendiente a facturar" widget="Monetary" sum="outstanding_invoice_amount" />
-        <field name="margin_project" string="Margen proyecto" widget="Monetary" sum="margin_project" />
       </field>
 
-      <field name="credit" position="after">
-        <field name="debit" position="move" />
+      <field name="total_facturado" position="after">
+        <field name="total_facturado_proveedores" position="move" />
       </field>
 
       <field name="complete_name" position="before">
