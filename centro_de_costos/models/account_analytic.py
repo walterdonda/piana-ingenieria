@@ -1,6 +1,7 @@
-from sre_parse import State
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from pyxirr import xirr
+from pyxirr import xnpv
 
 
 class CentroDeCostos(models.Model):
@@ -124,3 +125,41 @@ class CentroDeCostos(models.Model):
             )
             # Calcular el total facturado a proveedores a partir de la suma de los montos de las líneas
             record.total_facturado_proveedores = sum(lines.mapped("debit"))
+
+    tir_no_per = fields.Char(
+        compute="_compute_rentabilidad", string="Tasa de retorno inversión"
+    )
+    vna = fields.Char(compute="_compute_rentabilidad", string="Valor actual neto")
+
+    @api.depends("line_ids")
+    def _compute_rentabilidad(self):
+        for record in self:
+            # Obtener las líneas de facturas con la cuenta analítica y las ordeno por fecha
+            lineas = (
+                self.env["account.move.line"]
+                .search(
+                    [
+                        ("analytic_account_id", "=", record.id),
+                    ]
+                )
+                .sorted(key=lambda x: x.date)
+            )
+            # Obtengo las fechas de los pagos de los apuntes contables desde los grupos de pago
+            fechas = lineas.mapped("move_id.payment_group_ids.payment_date")
+            cashflows = []
+            for line in lineas:
+                if line.debit > 0:
+                    cashflows.append(-line.debit)
+                if line.credit > 0:
+                    cashflows.append(line.credit)
+
+                try:
+                    tir = xirr(fechas, cashflows)
+                except:
+                    tir = 0
+                try:
+                    vna = xnpv(0.15, fechas, cashflows)
+                except:
+                    vna = record.margin_project
+            record.tir_no_per = tir * 100
+            record.vna = vna
