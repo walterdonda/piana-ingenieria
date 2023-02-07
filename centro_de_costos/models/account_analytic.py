@@ -126,10 +126,10 @@ class CentroDeCostos(models.Model):
             # Calcular el total facturado a proveedores a partir de la suma de los montos de las líneas
             record.total_facturado_proveedores = sum(lines.mapped("debit"))
 
-    tir_no_per = fields.Char(
+    tir_no_per = fields.Float(
         compute="_compute_rentabilidad", string="Tasa de retorno inversión"
     )
-    vna = fields.Char(compute="_compute_rentabilidad", string="Valor actual neto")
+    vna = fields.Monetary(compute="_compute_rentabilidad", string="Valor actual neto")
 
     @api.depends("line_ids")
     def _compute_rentabilidad(self):
@@ -164,7 +164,7 @@ class CentroDeCostos(models.Model):
                         vna = xnpv(0.15, fechas, cashflows)
                     except:
                         vna = record.margin_project
-                record.tir_no_per = tir * 100
+                record.tir_no_per = tir / 100 
                 record.vna = vna
             else:
                 record.tir_no_per = 0

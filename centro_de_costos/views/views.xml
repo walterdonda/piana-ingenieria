@@ -57,8 +57,8 @@
         <field name="total_facturado" string="Total facturado a cliente" widget="Monetary" />
         <field name="outstanding_invoice_amount" string="Pendiente a facturar" widget="Monetary" />
         <field name="total_facturado_proveedores" string="Total facturado por proveedores" widget="Monetary" />
-        <field name="tir_no_per" string="TIR no periódica" />
-        <field name="vna" string="Valor neto actual no periódica" />
+        <field name="tir_no_per" string="TIR no periódica" widget="percentage" />
+        <field name="vna" string="Valor neto actual no periódica" widget="Monetary" />
       </field>
 
       <xpath expr="//form/*" position="before">
