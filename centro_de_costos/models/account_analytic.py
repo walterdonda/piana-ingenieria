@@ -17,7 +17,7 @@ class CentroDeCostos(models.Model):
         help="Presupuesto del proyecto",
     )
 
-    balance = fields.Monetary(string="Margen financiero")
+    balance = fields.Monetary(string="Margen bruto")
 
     margin_project = fields.Monetary(
         compute="_compute_margin_project",
