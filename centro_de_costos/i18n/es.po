@@ -17124,7 +17124,7 @@ msgstr ""
 #. module: analytic
 #: model_terms:ir.ui.view,arch_db:analytic.view_account_analytic_account_form
 msgid "<span class=\"o_stat_text\">Gross Margin</span>"
-msgstr "<span class=\"o_stat_text\">Margen financiero</span>"
+msgstr "<span class=\"o_stat_text\">Margen bruto</span>"
 
 
 
