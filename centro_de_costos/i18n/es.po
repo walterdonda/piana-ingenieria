@@ -17241,7 +17241,7 @@ msgstr ""
 #. module: analytic
 #: model:ir.actions.act_window,name:analytic.account_analytic_line_action
 msgid "Gross Margin"
-msgstr "Margen financiero"
+msgstr "Margen bruto"
 
 
 
