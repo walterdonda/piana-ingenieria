@@ -152,6 +152,9 @@ class CentroDeCostos(models.Model):
                 cashflows = lineas.mapped("move_id.payment_group_ids.payments_amount")
                 #Clasificar los chashflow partner_type=customer o partner_type= supplier
                 tipos = lineas.mapped("move_id.payment_group_ids.partner_type")
+                for i, m in enumerate(tipos):
+                    if m == 'supplier':
+                        cashflows[i] = -cashflows[i]
 
                 try:
                     tir = xirr(fechas, cashflows)
