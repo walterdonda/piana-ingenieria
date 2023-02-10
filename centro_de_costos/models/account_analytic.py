@@ -142,28 +142,25 @@ class CentroDeCostos(models.Model):
                     self.env["account.move.line"]
                     .search(
                         [
-                            ("analytic_account_id", "=", record.id),
+                            ("analytic_account_id", "=", 16),
                         ]
                     )
                     .sorted(key=lambda x: x.date)
                 )
-                # Obtengo las fechas de los pagos de los apuntes contables desde los grupos de pago
+                # Obtengo las fechas de los pagos de los apuntes contables desde los grupos de pago y sus montos
                 fechas = lineas.mapped("move_id.payment_group_ids.payment_date")
-                cashflows = []
-                for line in lineas:
-                    if line.debit > 0:
-                        cashflows.append(-line.debit)
-                    if line.credit > 0:
-                        cashflows.append(line.credit)
+                cashflows = lineas.mapped("move_id.payment_group_ids.payments_amount")
+                #Clasificar los chashflow partner_type=customer o partner_type= supplier
+                tipos = lineas.mapped("move_id.payment_group_ids.partner_type")
 
-                    try:
-                        tir = xirr(fechas, cashflows)
-                    except:
-                        tir = 0
-                    try:
-                        vna = xnpv(0.15, fechas, cashflows)
-                    except:
-                        vna = record.margin_project
+                try:
+                    tir = xirr(fechas, cashflows)
+                except:
+                    tir = 0
+                try:
+                    vna = xnpv(0.15, fechas, cashflows)
+                except:
+                    vna = record.margin_project
                 record.tir_no_per = tir / 100 
                 record.vna = vna
             else:
