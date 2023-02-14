@@ -59,6 +59,7 @@
         <field name="total_facturado_proveedores" string="Total facturado por proveedores" widget="Monetary" />
         <field name="tir_no_per" string="TIR (NO.PER)" widget="percentage" />
         <field name="vna" string="Valor neto actual (NO.PER)" widget="Monetary" />
+        <field name="discount_rate" string="Tasa de descuento"/>
       </field>
 
       <xpath expr="//form/*" position="before">

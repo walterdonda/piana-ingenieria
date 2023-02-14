@@ -129,42 +129,51 @@ class CentroDeCostos(models.Model):
     tir_no_per = fields.Float(
         compute="_compute_rentabilidad", string="Tasa de retorno inversión"
     )
+    discount_rate = fields.Float(string="Tasa de corte", default=0.15, options={'show_percent': True})
+
     vna = fields.Monetary(compute="_compute_rentabilidad", string="Valor actual neto")
 
-    @api.depends("line_ids")
+    @api.depends("line_ids", "discount_rate")
     def _compute_rentabilidad(self):
         for record in self:
             # Obtener las líneas de facturas con la cuenta analítica y las ordeno por fecha
             if self.env["account.move.line"].search(
                 [("analytic_account_id", "=", record.id)]
             ):
-                lineas = (
-                    self.env["account.move.line"]
-                    .search(
+                lineas = self.env["account.move.line"].search(
                         [
-                            ("analytic_account_id", "=", 16),
+                            ("analytic_account_id", "=", record.id),
                         ]
-                    )
-                    .sorted(key=lambda x: x.date)
-                )
-                # Obtengo las fechas de los pagos de los apuntes contables desde los grupos de pago y sus montos
-                fechas = lineas.mapped("move_id.payment_group_ids.payment_date")
-                cashflows = lineas.mapped("move_id.payment_group_ids.payments_amount")
-                #Clasificar los chashflow partner_type=customer o partner_type= supplier
-                tipos = lineas.mapped("move_id.payment_group_ids.partner_type")
-                for i, m in enumerate(tipos):
-                    if m == 'supplier':
-                        cashflows[i] = -cashflows[i]
+                    ).sorted(key=lambda r: r.date)
+                   
+                
+                # Obtengo las fechas de los pagos de los apuntes contables desde los grupos de pago y sus montos sin impuestos
+                fechas = lineas.mapped("move_id.line_ids.payment_group_ids.payment_date")
+                
+                #con esto anda PRAGA - RZ EPF - Compresor K-008 pago mayor a la linea de factura
+                cashflows = lineas.mapped("price_subtotal")
+                if len(fechas) != len(cashflows):
+                    cashflows = lineas.mapped("move_id.line_ids.payment_group_ids.matched_amount_untaxed")
+
+
+                #Divido los chashflow en positivos partner_type=customer o negativos partner_type= supplier
+                tipos = lineas.mapped("move_id.line_ids.payment_group_ids.partner_type")
+                
 
                 try:
+                    for i, m in enumerate(tipos):
+                        if m == 'supplier':
+                            cashflows[i] = -cashflows[i]
+                    #intento calcular la tasa interna de retorno
                     tir = xirr(fechas, cashflows)
                 except:
                     tir = 0
                 try:
-                    vna = xnpv(0.15, fechas, cashflows)
+                    #intento calcular el valor neto actual del proyecto
+                    vna = xnpv(record.discount_rate/100, fechas, cashflows)
                 except:
                     vna = record.margin_project
-                record.tir_no_per = tir / 100 
+                record.tir_no_per = tir/100 
                 record.vna = vna
             else:
                 record.tir_no_per = 0
