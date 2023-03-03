@@ -127,54 +127,40 @@ class CentroDeCostos(models.Model):
             record.total_facturado_proveedores = sum(lines.mapped("debit"))
 
     tir_no_per = fields.Float(
-        compute="_compute_rentabilidad", string="Tasa de retorno inversión"
+        compute="_compute_rentabilidad", string="TIR.NO.PER",
+        help="Calcula la tasa interna de retorno de un proyecto en función de una serie especificada de flujos de efectivo que no son necesariamente periódicos."
     )
-    discount_rate = fields.Float(string="Tasa de corte", default=0.15, options={'show_percent': True})
+    discount_rate = fields.Float(string="Tasa de descuento", default=0.15, help="Es el rendimiento mínimo que debe ofrecer un proyecto para que sea rentable su ejecución.")
 
-    vna = fields.Monetary(compute="_compute_rentabilidad", string="Valor actual neto")
+    vna = fields.Monetary(compute="_compute_rentabilidad", string="Valor actual neto", help="Calcula el valor actual neto de un proyecto en función de una serie de flujos de efectivo que no son necesariamente periódicos y de una tasa de descuento determinada.")
 
     @api.depends("line_ids", "discount_rate")
     def _compute_rentabilidad(self):
         for record in self:
-            # Obtener las líneas de facturas con la cuenta analítica y las ordeno por fecha
-            if self.env["account.move.line"].search(
-                [("analytic_account_id", "=", record.id)]
-            ):
-                lineas = self.env["account.move.line"].search(
-                        [
-                            ("analytic_account_id", "=", record.id),
-                        ]
-                    ).sorted(key=lambda r: r.date)
-                   
-                
-                # Obtengo las fechas de los pagos de los apuntes contables desde los grupos de pago y sus montos sin impuestos
-                fechas = lineas.mapped("move_id.line_ids.payment_group_ids.payment_date")
-                
-                #con esto anda PRAGA - RZ EPF - Compresor K-008 pago mayor a la linea de factura
-                cashflows = lineas.mapped("price_subtotal")
-                if len(fechas) != len(cashflows):
-                    cashflows = lineas.mapped("move_id.line_ids.payment_group_ids.matched_amount_untaxed")
+            # Obtener las líneas de facturas con impuesto 21
+            lineas_facturas = self.env["account.move.line"].search(
+                    [
+                        ("analytic_account_id", "=", record.id),
+                    ]
+                )
 
-
-                #Divido los chashflow en positivos partner_type=customer o negativos partner_type= supplier
-                tipos = lineas.mapped("move_id.line_ids.payment_group_ids.partner_type")
-                
-
-                try:
-                    for i, m in enumerate(tipos):
-                        if m == 'supplier':
-                            cashflows[i] = -cashflows[i]
-                    #intento calcular la tasa interna de retorno
-                    tir = xirr(fechas, cashflows)
-                except:
-                    tir = 0
-                try:
-                    #intento calcular el valor neto actual del proyecto
-                    vna = xnpv(record.discount_rate/100, fechas, cashflows)
-                except:
-                    vna = record.margin_project
-                record.tir_no_per = tir/100 
-                record.vna = vna
-            else:
-                record.tir_no_per = 0
-                record.vna = record.margin_project
+            lineas_facturas_ids = lineas_facturas.ids
+            facturas = self.env["account.move"].search(
+                    [
+                        ("invoice_line_ids", "in", lineas_facturas_ids),
+                    ])
+            try:
+                #Intento calcular la tasa de retorno de intervalos irregulares
+                #Para las facturas que tienen más de un grupo de pago, tomo la fecha del último pago
+                credit = lineas_facturas.mapped(lambda r: (r.move_id.payment_group_ids.sorted(key=lambda r: r.payment_date, reverse=True)[0].payment_date, r.credit))
+                debit = lineas_facturas.mapped(lambda r: (r.move_id.payment_group_ids.sorted(key=lambda r: r.payment_date, reverse=True)[0].payment_date, (-1)*r.debit))
+                cashflows = credit + debit
+                tir = xirr(cashflows)
+            except:
+                tir = 0
+            try:
+                vna = xnpv(record.discount_rate,cashflows)
+            except:
+                vna = record.margin_project
+            record.tir_no_per = tir 
+            record.vna = vna
