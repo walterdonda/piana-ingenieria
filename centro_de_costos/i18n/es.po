@@ -17750,32 +17750,6 @@ msgid ""
 msgstr ""
 
 #. module: account_ux
-#: code:addons/account_ux/models/account_move.py:0
-#, python-format
-msgid ""
-"Some move lines don't have analytic account and analytic account is required by theese accounts.\n"
-"* Accounts: %s\n"
-"* Move lines ids: %s"
-msgstr ""
-"Algunas líneas de movimiento no tienen un centro de costos y estas cuentas requieren un centro de costos.\n"
-" * Cuentas:%s \n"
-"* Mover líneas ids:%s"
-
-#. module: account_ux
-#: code:addons/account_ux/models/account_move.py:0
-#, python-format
-msgid ""
-"Some move lines don't have analytic tags and analytic tags are required by theese accounts.\n"
-"* Accounts: %s\n"
-"* Move lines ids: %s"
-msgstr ""
-"Algunas líneas de movimiento no tienen etiquetas analíticas y estas cuentas requieren etiquetas analíticas.\n"
-"* Cuentas:%s\n"
-"* Mover líneas ids:%s"
-
-
-
-#. module: account_ux
 #: model_terms:ir.ui.view,arch_db:account_ux.view_account_bank_statement_form
 msgid "Statement Lines"
 msgstr "Lineas de Declaración"
