@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nota_de_debito_afip_periodo_asoc" model="ir.ui.view">
+        <field name="name">Agrego período notas de débito fiscales</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_ar_afipws_fe.view_move_form"/>
+        <field name="arch" type="xml">
+                   <field name="l10n_ar_afip_concept" position="after">
+                        <label for="afip_auth_code" string="Período asociado para AFIP"/>
+                        <div class="oe_inline" attrs="{'invisible':[('move_type', '=', 'out_refund'),('reversed_entry_id','=',True)]}">
+                            <field name="afip_associated_period_from" class="oe_inline" placeholder="Fecha desde"/>
+ -
+                            <field name="afip_associated_period_to" class="oe_inline" placeholder="Hasta"/>
+                        </div>
+
+                    </field>
+                    
+        </field>
+    </record>
+
+</odoo>

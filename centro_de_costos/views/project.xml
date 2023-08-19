@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Muevo el campo de centro de costos para que sea visible en la vista de proyectos -->
+    <record id="project_add_centro_de_costos" model="ir.ui.view">
+        <field name="name">Agrego centro de costos formulario proyecto</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="priority">15</field>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="analytic_account_id" position="move" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
