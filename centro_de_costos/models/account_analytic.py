@@ -102,7 +102,7 @@ class CentroDeCostos(models.Model):
     @api.depends("outstanding_invoice_amount")
     def _compute_state(self):
         for record in self:
-            if record["outstanding_invoice_amount"] == 0:
+            if record["outstanding_invoice_amount"] <= 0:
                 record["state"] = "Totalmente Facturado"
             else:
                 record["state"] = "Pendiente de Facturar"
