@@ -147,13 +147,15 @@ class CentroDeCostos(models.Model):
             lineas_facturas_ids = lineas_facturas.ids
             facturas = self.env["account.move"].search(
                     [
-                        ("invoice_line_ids", "in", lineas_facturas_ids),
+                        ("invoice_line_ids", "in", lineas_facturas.ids),
                     ])
             try:
                 #Intento calcular la tasa de retorno de intervalos irregulares
                 #Para las facturas que tienen más de un grupo de pago, tomo la fecha del último pago
                 credit = lineas_facturas.mapped(lambda r: (r.move_id.payment_group_ids.sorted(key=lambda r: r.payment_date, reverse=True)[0].payment_date, r.credit))
+                #filtered_credit = [(date, value) for date, value in credit if value != 0.0]
                 debit = lineas_facturas.mapped(lambda r: (r.move_id.payment_group_ids.sorted(key=lambda r: r.payment_date, reverse=True)[0].payment_date, (-1)*r.debit))
+                #filtered_debit = [(date, value) for date, value in debit if value != 0.0]
                 cashflows = credit + debit
                 tir = xirr(cashflows)
             except:
