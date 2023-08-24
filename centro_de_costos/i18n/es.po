@@ -17878,7 +17878,7 @@ msgid ""
 msgstr ""
 "Centro de costos al cual se vincula esta tarea para la gestión financiera. "
 "Utilice un centro de costos para registrar los costos e ingresos de la "
-"tarea. Si está vaciío, el centro de costo es el del proyecto."
+"tarea. Si está vacío, el centro de costo es el del proyecto."
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task__project_analytic_account_id
