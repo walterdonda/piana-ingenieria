@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_detalle_centro_de_costos" model="ir.actions.report">
+            <field name="name">Detalle centro de costo</field>
+            <field name="model">account.analytic.account</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">centro_de_costos.report_detalle_centro_de_costos</field>
+            <field name="print_report_name">'Detalle de movimiento- %s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_account_analytic_account"/>
+            <field name="binding_type">report</field>
+    </record>
+
+</odoo>
