@@ -23,7 +23,7 @@
     "version": "1.0",
     # Este módulo depende de los siguientes módulos de odoo 15
     "depends": ["base", "account", "analytic", "account_analytic_parent","project","l10n_ar_afipws_fe"],
-    # Se cargan los datos de acceso y los reportes
+    # Se cargan los datos de acceso y los reportes nuevos
     "data": [
         "security/ir.model.access.csv",
         "views/views.xml",
