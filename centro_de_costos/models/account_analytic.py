@@ -137,7 +137,7 @@ class CentroDeCostos(models.Model):
     @api.depends("line_ids", "discount_rate")
     def _compute_rentabilidad(self):
         for record in self:
-            # Obtener las líneas de facturas con impuesto 21
+            # invoice_reports.mapped(lambda r: (r.price_subtotal, r.move_id.payment_group_ids.payment_date))
             lineas_facturas = self.env["account.move.line"].search(
                     [
                         ("analytic_account_id", "=", record.id),
