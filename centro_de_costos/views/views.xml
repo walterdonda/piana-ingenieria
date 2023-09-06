@@ -74,6 +74,17 @@
       </xpath>
     </field>
   </record>
+  <record id="payment_date_account_move_form" model="ir.ui.view">
+    <field name="name">payment_date.account.move.form</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"></field>
+    <field name="arch" type="xml">
+      <field name="payment_reference" position="after">
+        <field name="payment_date" string="Fecha de cancelación" readonly="1" />
+      </field>
+    </field>
+  </record>
+  
 
 </odoo>
 
