@@ -29,6 +29,7 @@
         "views/views.xml",
         "views/project.xml",
         "views/debit_note_afip.xml",
+        "views/report_invoice_analysis.xml",
         "report/report.xml",
         "report/template_centro_de_costos.xml",
     ],
