@@ -28,7 +28,8 @@ class CentroDeCostos(models.Model):
     def _compute_margin_project(self):
         for record in self:
             record["margin_project"] = (
-                record["total_facturado"] - record["total_facturado_proveedores"]
+                record["total_facturado"] -
+                record["total_facturado_proveedores"]
             )
 
     updatable_by_index = fields.Boolean(
@@ -68,9 +69,8 @@ class CentroDeCostos(models.Model):
                 ]
             )
             # Resto de las facturas cliente las notas de crédito
-            record.total_facturado = sum(lines.mapped("credit")) - sum(
-                lines.mapped("debit")
-            )
+            record.total_facturado = sum(lines.mapped(
+                "credit")) - sum(lines.mapped("debit"))
 
     outstanding_invoice_amount = fields.Monetary(
         compute="_compute_outstanding_invoice_amount",
@@ -91,7 +91,8 @@ class CentroDeCostos(models.Model):
     def inverse_outstanding_invoice_amount(self):
         for record in self:
             record["budget_project"] = (
-                record["outstanding_invoice_amount"] + record["total_facturado"]
+                record["outstanding_invoice_amount"] +
+                record["total_facturado"]
             )
 
     def search_outstanding_invoice_amount(self, operator, value):
@@ -130,46 +131,44 @@ class CentroDeCostos(models.Model):
         compute="_compute_rentabilidad", string="TIR.NO.PER",
         help="Calcula la tasa interna de retorno de un proyecto en función de una serie especificada de flujos de efectivo que no son necesariamente periódicos."
     )
-    discount_rate = fields.Float(string="Tasa de descuento", default=0.15, help="Es el rendimiento mínimo que debe ofrecer un proyecto para que sea rentable su ejecución.")
+    discount_rate = fields.Float(string="Tasa de descuento", default=0.15,
+                                 help="Es el rendimiento mínimo que debe ofrecer un proyecto para que sea rentable su ejecución.")
 
-    vna = fields.Monetary(compute="_compute_rentabilidad", string="Valor actual neto", help="Calcula el valor actual neto de un proyecto en función de una serie de flujos de efectivo que no son necesariamente periódicos y de una tasa de descuento determinada.")
+    vna = fields.Monetary(compute="_compute_rentabilidad", string="Valor actual neto",
+                          help="Calcula el valor actual neto de un proyecto en función de una serie de flujos de efectivo que no son necesariamente periódicos y de una tasa de descuento determinada.")
 
     @api.depends("line_ids", "discount_rate")
     def _compute_rentabilidad(self):
         for record in self:
             # invoice_reports.mapped(lambda r: (r.price_subtotal, r.move_id.payment_group_ids.payment_date))
-            lineas_facturas = self.env["account.move.line"].search(
-                    [
-                        ("analytic_account_id", "=", record.id),
-                    ]
-                )
-
-            lineas_facturas_ids = lineas_facturas.ids
-            facturas = self.env["account.move"].search(
-                    [
-                        ("invoice_line_ids", "in", lineas_facturas.ids),
-                    ])
+            invoice_lines = self.env["account.move.line"].search(
+                [
+                    ("analytic_account_id", "=", record.id),
+                ]
+            )
             try:
-                #Intento calcular la tasa de retorno de intervalos irregulares
-                #Para las facturas que tienen más de un grupo de pago, tomo la fecha del último pago
-                credit = lineas_facturas.mapped(lambda r: (r.move_id.payment_group_ids.sorted(key=lambda r: r.payment_date, reverse=True)[0].payment_date, r.credit))
-                #filtered_credit = [(date, value) for date, value in credit if value != 0.0]
-                debit = lineas_facturas.mapped(lambda r: (r.move_id.payment_group_ids.sorted(key=lambda r: r.payment_date, reverse=True)[0].payment_date, (-1)*r.debit))
-                #filtered_debit = [(date, value) for date, value in debit if value != 0.0]
+                # Intento calcular la tasa de retorno de intervalos irregulares
+                credit = invoice_lines.filtered(lambda r: r.credit != 0).mapped(
+                    lambda r: (r.move_id.payment_date, r.credit))
+                debit = invoice_lines.filtered(lambda r: r.debit != 0).mapped(
+                    lambda r: (r.move_id.payment_date, (-1)*r.debit))
                 cashflows = credit + debit
                 tir = xirr(cashflows)
             except:
                 tir = 0
             try:
-                vna = xnpv(record.discount_rate,cashflows)
+                vna = xnpv(record.discount_rate, cashflows)
             except:
                 vna = record.margin_project
-            record.tir_no_per = tir 
+            record.tir_no_per = tir
             record.vna = vna
+
+
 class AccountMove(models.Model):
     _inherit = "account.move"
 
     payment_date = fields.Date('Payment Date')
+
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
