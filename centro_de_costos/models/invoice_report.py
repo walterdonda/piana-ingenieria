@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api,tools
+from odoo import models, fields, api, tools
 from functools import lru_cache
+
 
 class InvoiceReport(models.Model):
     _name = "centro_de_costos.invoice.report"
@@ -19,16 +20,18 @@ class InvoiceReport(models.Model):
         ('out_refund', 'Nota de crédito cliente'),
         ('in_refund', 'Nota de crédito proveedor'),
     ], string="Tipo")
-    
+
     date = fields.Date(string="Date")
     invoice_date = fields.Date(string="Fecha de factura")
     payment_date = fields.Date(string="Fecha de pago total")
     partner_id = fields.Many2one('res.partner', string="Partner")
     journal_id = fields.Many2one('account.journal', string="Diario")
-    
+
     name = fields.Char(string="Name")
-    afip_responsibility_type_id = fields.Many2one('l10n_ar.afip.responsibility.type', string="AFIP Responsibility Type")
-    document_type_id = fields.Many2one('l10n_latam.document.type', string="Tipo documento")
+    afip_responsibility_type_id = fields.Many2one(
+        'l10n_ar.afip.responsibility.type', string="AFIP Responsibility Type")
+    document_type_id = fields.Many2one(
+        'l10n_latam.document.type', string="Tipo documento")
     state = fields.Selection([
         ('draft', 'Borrador'),
         ('posted', 'Confirmada'),
@@ -39,11 +42,11 @@ class InvoiceReport(models.Model):
         ('in_payment', 'Parcialmente pagado'),
         ('paid', 'Pagado')
     ], string='Estado de pago', readonly=True)
-    centro_costo = fields.Many2one('account.analytic.account', string='Centro de costos')
+    centro_costo = fields.Many2one(
+        'account.analytic.account', string='Centro de costos')
     credit = fields.Float(string='Crédito')
     debit = fields.Float(string='Débito')
 
-    
     def init(self):
         cr = self._cr
         tools.drop_view_if_exists(cr, self._table)
