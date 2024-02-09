@@ -28,10 +28,10 @@ class InvoiceReport(models.Model):
     journal_id = fields.Many2one('account.journal', string="Diario")
 
     name = fields.Char(string="Name")
-    afip_responsibility_type_id = fields.Many2one(
-        'l10n_ar.afip.responsibility.type', string="AFIP Responsibility Type")
-    document_type_id = fields.Many2one(
-        'l10n_latam.document.type', string="Tipo documento")
+    #afip_responsibility_type_id = fields.Many2one(
+        #'l10n_ar.afip.responsibility.type', string="AFIP Responsibility Type")
+    #document_type_id = fields.Many2one(
+       #'l10n_latam.document.type', string="Tipo documento")
     state = fields.Selection([
         ('draft', 'Borrador'),
         ('posted', 'Confirmada'),
