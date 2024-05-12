@@ -5,7 +5,7 @@
         Módulo que permite agregar el concepto de centro de costos a odoo 
         """,
     "description": """
-        Este módulo permite hacer el seguimiento de la facturación de c/u de la empresa.
+        Este módulo permite hacer el seguimiento de la facturación de c/u de los proyectos de la empresa.
 
         A cada proyecto se le asigna un centro de costo o una jerarquía del mismo. 
         Para esto se modifica el modelo de odoo cuenta analítica y se le agregan los siguientes campos:
@@ -14,7 +14,7 @@
         
         margin_project --> Margen económico del proyecto
         
-        outstanding_invoice_amount --> Monto pendiente a facturar
+        outstanding_invoice_amount --> Monto pendiente a facturar en cada centro de costo
         
         Al final del proyecto el monto pendiente de facturar en el centro de costo debe ser 0.
     """,
